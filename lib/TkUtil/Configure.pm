@@ -11,20 +11,20 @@ TkUtil::Configure - Trap and act on Tk <Configure> events
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 =head1 SYNOPSIS
 
-Fairly intelligent trapping of <Configure> events withing Perl/Tk.
+Fairly intelligent trapping of <Configure> events within Perl/Tk.
 
     use TkUtil::Configure;
 
-    my $foo = TkUtil::Configure->new(top => $mw, callback => ??);
+    my $conf = TkUtil::Configure->new(top => $mw, callback => ??);
 
 All you currently have is the constructor, because that's all that
 is needed. See below for additional information.
@@ -103,12 +103,12 @@ our $Class;
 
 =head2 B<new>
 
-  TkUtil::Configure->new(top => ??, callback => ??, %opts);
+  $conf = TkUtil::Configure->new(top => ??, callback => ??, %opts);
 
 %opts can be:
 
   on      - provide a widget id to trigger the callback for [1]
-  timeout - amount of time before a callback is generated [2]
+  timeout - amount of time before a callback is generated (in msec) [2]
 
 I<top> is the toplevel widget upon which to bind the <Configure>
 event.
@@ -118,12 +118,13 @@ have multiple widgets specified in I<on> and only a single I<callback>
 if you like (since the first argument to the callback is the widget,
 the callback can behave differently based upon it).
 
-[1] callback is called when the top widget is configured (resized). It
+    [1] callback is called when the top widget is configured (resized). It
     is called with the widget id and the new width and height of the 
     widget under 
     consideration (I<on>). I<on> is the widget id to trigger this
     particular callback for.
-[2] when a widget is resized, we get LOTS of <Configure> events.
+
+    [2] when a widget is resized, we get LOTS of <Configure> events.
     Even with fast computers, you can overload with events if
     you need to do something complex when the user resizes. The
     timeout allows you to build up events until the last event
@@ -257,6 +258,14 @@ sub _init {
     );
 
 }
+
+=head2 B<culled>
+
+  $conf->culled();
+
+Find how many events were culled for you.
+
+=cut
 
 sub culled {
     my ($self) = @_;

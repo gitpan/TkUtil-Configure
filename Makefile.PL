@@ -14,6 +14,8 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More' => 0,
         'Perl6::Attributes' => '0.04',
+        'Time::HiRes' => '1.9711',
+        'Tk' => '804.025',
     },
     #dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', TARFLAGS =>'cvzf --numeric-owner'},
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },

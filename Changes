@@ -2,4 +2,5 @@ Revision history for TkUtil-Configure
 
 0.01    Mar 4, 2009
         First release
-
+0.02    Corrected minor spelling typos and documented a function
+        that was making people say it was failing tests.
