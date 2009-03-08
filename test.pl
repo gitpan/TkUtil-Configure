@@ -15,7 +15,12 @@ sub Banner {
         -font => "Courier 24", -fill => 'black', -anchor => 'nw');
 }
 
-my $mw = MainWindow->new;
+my $mw;
+eval qq(\$mw = MainWindow->new);
+if ($@) {
+    print STDERR "No DISPLAY to connect to\n";
+    exit(0);
+}
 my $frame = $mw->Frame->pack(-fill => 'both', -expand => 1);
 $canvasL = $frame->Canvas(-width => 300, -background => 'light blue')->
     pack(-side => 'left', -fill => 'y', -expand => 1);
